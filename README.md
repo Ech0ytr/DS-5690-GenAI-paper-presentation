@@ -62,6 +62,52 @@ The paper tests multiple activation functions in the gating path:
 ---
 
 ## Understanding the Metrics
+## 🤔 What does perplexity mean when it's a float like 1.677? And why does 1.677 → 1.633 matter?
+
+<details>
+  <summary>Show Answer</summary>
+
+### 📘 Definition of Perplexity
+- **Perplexity** is a measure of how "confused" a language model is when predicting the next token.
+- **Formula**:  
+  
+
+\[
+  \text{Perplexity} = e^{\text{cross-entropy loss}}
+  \]
+
+
+- **Interpretation**:  
+  - Lower perplexity = better predictions  
+  - Perplexity of **1.0** = perfect certainty  
+  - Perplexity of **2.0** = as uncertain as a coin flip
+
+---
+
+### 📊 Why does a change from 1.677 to 1.633 matter?
+
+- These values represent **average uncertainty** across many predictions.
+- **Converting to confidence**:
+  - Perplexity **1.677** ≈ **59.6%** average confidence
+  - Perplexity **1.633** ≈ **61.2%** average confidence
+- **Impact**:
+  - A **1.6% absolute improvement** may seem small, but it **compounds** over thousands or millions of predictions.
+  - This can lead to **significantly better performance** in real-world tasks.
+
+---
+
+### 🔍 Why can perplexity be less than 2?
+
+- Perplexity doesn't mean choosing between 1.677 items.
+- It reflects the **equivalent uncertainty** of choosing **uniformly** among that many options.
+- In reality:
+  - Models predict from **50,000+ tokens**
+  - But often with **high confidence** (e.g., 95% sure)
+  - High confidence → **Low perplexity**
+
+</details>
+
+
 
 ### What is Perplexity?
 - **Definition**: A measure of how "confused" the model is when predicting text
