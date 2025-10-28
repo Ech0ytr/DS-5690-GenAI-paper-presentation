@@ -14,7 +14,7 @@ This paper shows that replacing standard ReLU-based feed-forward networks in Tra
 
 ## Core Concept: What Problem Does This Solve?
 
-### The Standard Transformer FFN (What We Learned in Class)
+### The Standard Transformer FFN 
 In the original Transformer, each layer has two components:
 1. **Multi-head Attention**: Captures relationships between tokens
 2. **Feed-Forward Network (FFN)**: Processes each position independently
