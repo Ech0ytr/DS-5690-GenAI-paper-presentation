@@ -62,6 +62,15 @@ The paper tests multiple activation functions in the gating path:
 ---
 
 ## Understanding the Metrics
+
+### What is Perplexity?
+- **Definition**: A measure of how "confused" the model is when predicting text
+- **Formula**: `Perplexity = e^(cross-entropy loss)`
+- **Interpretation**: 
+  - Lower is better
+  - Perplexity of 1.0 = perfect prediction
+  - Perplexity of 2.0 = as confused as a coin flip
+
 ## What does perplexity mean when it's a float like 1.677? And why does 1.677 → 1.633 matter?
 
 <details>
@@ -109,13 +118,9 @@ The paper tests multiple activation functions in the gating path:
 
 
 
-### What is Perplexity?
-- **Definition**: A measure of how "confused" the model is when predicting text
-- **Formula**: `Perplexity = e^(cross-entropy loss)`
-- **Interpretation**: 
-  - Lower is better
-  - Perplexity of 1.0 = perfect prediction
-  - Perplexity of 2.0 = as confused as a coin flip
+
+
+
 
 ### Why 1.677 → 1.633 Matters
 Converting to actual probabilities:
