@@ -71,8 +71,9 @@ The paper tests multiple activation functions in the gating path:
   - Perplexity of 1.0 = perfect prediction
   - Perplexity of 2.0 = as confused as a coin flip
 
+
+### Why can perplexity be less than 2? Why does a change from 1.677 to 1.633 matter?
 <details>
-  Why can perplexity be less than 2? Why does a change from 1.677 to 1.633 matter?
   <summary>Show Answer</summary>
 
 ### Why can perplexity be less than 2?
