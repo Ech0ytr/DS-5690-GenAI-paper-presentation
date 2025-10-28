@@ -76,22 +76,14 @@ The paper tests multiple activation functions in the gating path:
 <details>
   <summary>Show Answer</summary>
 
-### Definition of Perplexity
-- **Perplexity** is a measure of how "confused" a language model is when predicting the next token.
-- **Formula**:  
-  
+### Why can perplexity be less than 2?
 
-\[
-  \text{Perplexity} = e^{\text{cross-entropy loss}}
-  \]
-
-
-- **Interpretation**:  
-  - Lower perplexity = better predictions  
-  - Perplexity of **1.0** = perfect certainty  
-  - Perplexity of **2.0** = as uncertain as a coin flip
-
----
+- Perplexity doesn't mean choosing between 1.677 items.
+- It reflects the **equivalent uncertainty** of choosing **uniformly** among that many options.
+- In reality:
+  - Models predict from **50,000+ tokens**
+  - But often with **high confidence** (e.g., 95% sure)
+  - High confidence → **Low perplexity**
 
 ### Why does a change from 1.677 to 1.633 matter?
 
@@ -105,37 +97,8 @@ The paper tests multiple activation functions in the gating path:
 
 ---
 
-### Why can perplexity be less than 2?
-
-- Perplexity doesn't mean choosing between 1.677 items.
-- It reflects the **equivalent uncertainty** of choosing **uniformly** among that many options.
-- In reality:
-  - Models predict from **50,000+ tokens**
-  - But often with **high confidence** (e.g., 95% sure)
-  - High confidence → **Low perplexity**
-
 </details>
 
-
-
-
-
-
-
-### Why 1.677 → 1.633 Matters
-Converting to actual probabilities:
-- **Baseline (1.677)**: ~59.6% average confidence
-- **GEGLU (1.633)**: ~61.2% average confidence
-- **Impact**: 1.6% absolute improvement compounds over many predictions!
-
-### Understanding Perplexity < 2
-Why can perplexity be less than 2? Because it measures **equivalent** uncertainty:
-- **Perplexity = 1.633** doesn't mean choosing between 1.633 items
-- It means the model's uncertainty is **as if** choosing equally between 1.633 items
-- In reality: Model predicts from 50,000+ tokens with high confidence (e.g., 95% sure)
-- High confidence → Low perplexity
-
----
 
 ## 🔧 How GLU Works: The Two-Path Architecture
 
