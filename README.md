@@ -71,8 +71,6 @@ The paper tests multiple activation functions in the gating path:
   - Perplexity of 1.0 = perfect prediction
   - Perplexity of 2.0 = as confused as a coin flip
 
-## What does perplexity mean when it's a float like 1.677? And why does 1.677 → 1.633 matter?
-
 <details>
   <summary>Show Answer</summary>
 
