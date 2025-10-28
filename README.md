@@ -415,29 +415,6 @@ output = model(x)  # [32, 100, 768]
 
 ---
 
-## Questions for Discussion
-
-1. **Why might multiplication be more powerful than addition in neural networks?**
-   - Enables conditional computation
-   - Creates richer feature interactions
-   - Provides fine-grained control
-
-2. **Could we apply gating to other parts of the Transformer?**
-   - Attention mechanisms (done in Flash Attention)
-   - Layer normalization
-   - Residual connections
-
-3. **What's the computational cost of the extra matrix multiplication?**
-   - One extra matrix multiply
-   - Element-wise multiplication (cheap)
-   - Overall: ~10-15% slower, but worth it for quality
-
-4. **Why does even "Bilinear" (no activation) beat ReLU baseline?**
-   - Multiplication itself is non-linear
-   - Two specialized paths better than one general path
-   - Shows activations might be less important than architecture
-
----
 
 ## Summary: Why You Should Care
 
