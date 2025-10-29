@@ -76,7 +76,7 @@ The paper tests multiple activation functions in the gating path:
 <details>
   <summary>Show Answer</summary>
 
-### Why can perplexity be less than 2?
+### Why can perplexity be a float?
 
 - Perplexity doesn't mean choosing between 1.677 items.
 - It reflects the **equivalent uncertainty** of choosing **uniformly** among that many options.
