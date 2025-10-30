@@ -273,34 +273,6 @@ Unlike ReLU (binary: on/off), GLU provides fine-grained control:
 - Even "Bilinear" (no activation) beats baseline!
 - Improvements are statistically significant (exceed 2× std dev)
 
----
-
-## Parameter Efficiency Clarification
-
-### GLU Maintains Same Parameter Count
-
-**Standard FFN**: 2 matrices × 3072 hidden dims
-```
-W₁: [768 × 3072] = 2,359,296 params
-W₂: [3072 × 768] = 2,359,296 params
-Total: 4,718,592 parameters
-```
-
-**GLU FFN**: 3 matrices × 2048 hidden dims
-```
-W:  [768 × 2048] = 1,572,864 params (gate)
-V:  [768 × 2048] = 1,572,864 params (value)
-W₂: [2048 × 768] = 1,572,864 params (projection)
-Total: 4,718,592 parameters
-```
-
-**The Trade-off**: 
-- Standard: Fewer matrices (2) × Larger dimensions (3072)
-- GLU: More matrices (3) × Smaller dimensions (2048)
-- **Same total parameters, better performance!**
-
----
-
 ## Real-World Impact
 
 ### Who's Using SwiGLU Now?
