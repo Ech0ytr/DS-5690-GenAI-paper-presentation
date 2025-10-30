@@ -309,7 +309,7 @@ Unlike ReLU (binary: on/off), GLU provides fine-grained control:
 3. **Simple baselines can be beaten** with thoughtful modifications
 4. **Comprehensive evaluation is crucial** - Test on diverse tasks
 
-### The Paper's Humorous Conclusion
+### The Paper says
 > "We offer no explanation as to why these architectures seem to work; we attribute their success, as all else, to divine benevolence."
 
 Despite this, the results speak for themselves!
