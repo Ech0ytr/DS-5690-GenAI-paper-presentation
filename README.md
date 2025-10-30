@@ -73,18 +73,22 @@ The paper tests multiple activation functions in the gating path:
 
 
 ### Why 1.677 → 1.633 Matters
-Converting to Real Performance:
 
-Baseline (1.677): ~59.6% average confidence per prediction
-GEGLU (1.633): ~61.2% average confidence per prediction
-Impact: This 2.7% relative improvement compounds exponentially over sequences
+**Converting to Real Performance:**
+- **Baseline (1.677)**: ~59.6% average confidence per prediction
+- **GEGLU (1.633)**: ~61.2% average confidence per prediction
+- **Impact**: This 2.7% relative improvement compounds exponentially over sequences
 
-The Compounding Effect:
+**The Compounding Effect:**
+
 When generating 100 tokens, the probability of maintaining coherence:
 
-Baseline: 0.596^100 = 1.4 × 10^-23
-GEGLU: 0.612^100 = 7.8 × 10^-22
-GEGLU is 55× more likely to generate coherent long-form text
+| Model | Per-token Confidence | 100-token Coherence | Relative Improvement |
+|-------|---------------------|--------------------|--------------------|
+| Baseline | 0.596 | 1.4 × 10⁻²³ | - |
+| GEGLU | 0.612 | 7.8 × 10⁻²² | **55× better** |
+
+> **Key Insight**: GEGLU is 55× more likely to generate coherent long-form text
 
 This foundational improvement in language modeling directly translates to better performance across all downstream tasks - which is why modern LLMs like GPT-3, PaLM, and LLaMA have all adopted GLU variants.
 
