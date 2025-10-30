@@ -44,6 +44,15 @@ Input (x) → Linear (V) ──────────────┘
 
 ---
 
+<details>
+<summary><b>❓ Why is activation applied to W (gate) and not V (value)?</b></summary>
+
+### The Design Choice Explained
+
+The activation function is applied to W rather than V because of their fundamentally different roles in the architecture. **W is designed for filtering and importance scoring** - it needs to produce values that indicate "how much" of each feature should pass through, making activation functions like sigmoid or Swish perfect for creating these gating signals. **V is designed for feature extraction and transformation** - it needs to preserve the full richness and range of the learned features, including negative values, large magnitudes, and subtle variations that would be lost if we applied an activation function. 
+
+</details>
+
 ## Key Innovation: GLU Variants
 
 The paper tests multiple activation functions in the gating path:
@@ -154,28 +163,6 @@ Activation       ↓
       W₂ [2048×768]
          ↓
     Output [768]
-```
-
-### Concrete Example: Processing "The cat sat on the mat"
-
-For the word "cat":
-
-**Gate Path (W)** learns to identify importance:
-```
-Output: [0.9, 0.2, 0.8, ...]
-Meaning: [feature1: important, feature2: ignore, feature3: important]
-```
-
-**Value Path (V)** learns to extract features:
-```
-Output: [2.5, 1.8, 2.1, ...]
-Meaning: [animal=2.5, living=1.8, pet=2.1]
-```
-
-**Combined Result**:
-```
-gate × value = [0.9×2.5, 0.2×1.8, 0.8×2.1] = [2.25, 0.36, 1.68]
-Important features amplified, unimportant ones suppressed!
 ```
 
 ---
