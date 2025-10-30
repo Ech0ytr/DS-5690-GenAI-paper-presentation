@@ -295,21 +295,21 @@ Unlike ReLU (binary: on/off), GLU provides fine-grained control:
 ---
 
 
-## Key Takeaways
+## Critical Analysis
 
-### For ML Practitioners
-1. **Architecture details matter** - Small changes can yield significant gains
-2. **Gating mechanisms are powerful** - Adaptive computation beats fixed functions
-3. **Systematic exploration pays off** - Testing variants revealed better designs
-4. **Parameter count isn't everything** - Same parameters, better architecture = better results
+While the paper convincingly demonstrates that GLU variants improve Transformer performance during pretraining and fine-tuning, it does not deeply explore the **interpretability or internal dynamics** of why these activations work better.
 
-### For Researchers
-1. **Multiplicative interactions** > additive transformations
-2. **Specialization emerges naturally** through gradient descent
-3. **Simple baselines can be beaten** with thoughtful modifications
-4. **Comprehensive evaluation is crucial** - Test on diverse tasks
+Specifically:
+- The authors do **not analyze how GLU variants affect attention patterns**, gradient flow, or representation sparsity inside the Transformer.
+- This leaves a gap in understanding the **mechanistic reasons** behind the observed improvements.
 
-### The Paper says
+Additionally:
+- The paper focuses on **standard benchmarks** (e.g., WMT, GLUE) but does **not test robustness** in low-resource or adversarial settings.
+- This limits insight into how well GLU variants generalize beyond curated datasets.
+
+> These omissions present opportunities for future work to explore *why* GLU variants are effective and how they behave under more challenging or diverse conditions.
+
+The Paper says
 > "We offer no explanation as to why these architectures seem to work; we attribute their success, as all else, to divine benevolence."
 
 Despite this, the results speak for themselves!
