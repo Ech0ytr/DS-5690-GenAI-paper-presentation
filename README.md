@@ -44,14 +44,76 @@ Input (x) → Linear (V) ──────────────┘
 
 ---
 
+## First Question: Why is activation applied to W (gate) and not V (value)?
+
 <details>
-<summary><b> First Primary Question: Why is activation applied to W (gate) and not V (value)?</b></summary>
+  <summary>Show Answer</summary>
 
-### The Design Choice Explained
+### Architecture Behavior
 
-The activation function is applied to W rather than V because of their fundamentally different roles in the architecture. **W is designed for filtering and importance scoring** - it needs to produce values that indicate "how much" of each feature should pass through, making activation functions like sigmoid or Swish perfect for creating these gating signals. **V is designed for feature extraction and transformation** - it needs to preserve the full richness and range of the learned features, including negative values, large magnitudes, and subtle variations that would be lost if we applied an activation function. 
+In GLU-based feed-forward networks, the input is split into two parallel projections: W (gate) and V (value). These serve distinct roles in the computation.
+
+### Functional Roles
+
+- **W (Gate)**:  
+  The gate projection is responsible for filtering and importance scoring. It determines how much of each feature should pass through to the output. Applying an activation function like GELU or Swish here helps shape the gating signal, introducing non-linearity and allowing the model to selectively amplify or suppress features.
+
+- **V (Value)**:  
+  The value projection carries the raw feature representation. It is meant to preserve the full richness of the learned features, including negative values, large magnitudes, and subtle variations. Applying an activation here would distort or suppress these features, reducing the model’s expressive capacity.
+
+### Design Implication
+
+By applying activation only to the gate, the GLU mechanism maintains a balance between control and expressiveness. The gate modulates the flow, while the value retains the full feature signal. This separation is key to GLU’s improved performance over standard FFNs.
 
 </details>
+
+---
+
+## Second Question: How do the parameter dimensions and internal structure differ between the baseline linear FFN and the GLU-based FFN?
+
+<details>
+  <summary>Show Answer</summary>
+
+### Architecture Comparison
+
+**Standard FFN (Feed-Forward Network):**
+- Input: `[768]`
+- First Linear Layer: `W₁ [768×3072]`
+- Hidden Activation: `[3072]` → ReLU
+- Second Linear Layer: `W₂ [3072×768]`
+- Output: `[768]`
+
+**GLU-based FFN:**
+- Input: `[768]`
+- Two Parallel Projections:
+  - Gate: `W [768×2048]`
+  - Value: `V [768×2048]`
+- Activation: GLU (element-wise multiplication after activation)
+- Combined Hidden: `[2048]`
+- Second Linear Layer: `W₂ [2048×768]`
+- Output: `[768]`
+
+### Structural Differences
+
+- **Projection Strategy**:  
+  The standard FFN uses a single wide projection to 3072 dimensions. GLU splits the input into two separate projections, each to 2048 dimensions, which are then combined via element-wise multiplication.
+
+- **Activation Mechanism**:  
+  In the standard FFN, ReLU is applied to the entire hidden layer. In GLU, activation is applied only to the gate path before combining with the value path, introducing a dynamic gating mechanism.
+
+- **Parameter Count**:  
+  GLU adds a second projection (V), increasing the number of parameters in the first layer. However, the hidden size is reduced from 3072 to 2048, which partially offsets the increase.
+
+- **Dimensional Consistency**:  
+  Both architectures preserve the input and output dimensions of `[768]`, ensuring compatibility with the Transformer block. The internal structure is what differs.
+
+### Design Implication
+
+This architectural shift allows GLU variants to learn more selective and expressive representations. The gating mechanism enhances control over feature flow, contributing to lower perplexity and improved generalization in downstream tasks.
+
+</details>
+
+---
 
 ## Key Innovation: GLU Variants
 
