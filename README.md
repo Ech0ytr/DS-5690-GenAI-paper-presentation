@@ -7,7 +7,7 @@
 **Year**: 2020  
 **Paper Link**: [arXiv:2002.05202](https://arxiv.org/abs/2002.05202)
 
-### One-Line Summary
+### Summary
 This paper shows that replacing standard ReLU-based feed-forward networks in Transformers with Gated Linear Unit (GLU) variants achieves consistent performance improvements across language tasks.
 
 ---
