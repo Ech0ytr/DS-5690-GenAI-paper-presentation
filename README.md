@@ -101,7 +101,11 @@ When generating 100 tokens, the probability of maintaining coherence:
 
 This foundational improvement in language modeling directly translates to better performance across all downstream tasks - which is why modern LLMs like GPT-3, PaLM, and LLaMA have all adopted GLU variants.
 
-<img width="1000" height="600" alt="image" src="https://github.com/user-attachments/assets/140d75ae-c579-4d24-b81a-5bcd5ec65573" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/1247accd-cfa4-4f81-bfb2-52e8e9da09fe" width="45%" alt="Left Image" />
+  <img src="https://github.com/user-attachments/assets/140d75ae-c579-4d24-b81a-5bcd5ec65573" width="45%" alt="Right Image" />
+</p>
+
 
 ---
 
