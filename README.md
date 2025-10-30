@@ -72,19 +72,6 @@ The paper tests multiple activation functions in the gating path:
   - Perplexity of 2.0 = as confused as a coin flip
 
 
-## First Primary question: Why can perplexity be a float? Why does a change from 1.677 to 1.633 matter?
-<details>
-  <summary>Show Answer</summary>
-
-### Why can perplexity be a float?
-
-- Perplexity doesn't mean choosing between 1.677 items.
-- It reflects the **equivalent uncertainty** of choosing **uniformly** among that many options.
-- In reality:
-  - Models predict from **50,000+ tokens**
-  - But often with **high confidence** (e.g., 95% sure)
-  - High confidence → **Low perplexity**
-
 ### Why does a change from 1.677 to 1.633 matter?
 
 - These values represent **average uncertainty** across many predictions.
@@ -97,7 +84,6 @@ The paper tests multiple activation functions in the gating path:
 
 ---
 
-</details>
 
 
 ## 🔧 How GLU Works: The Two-Path Architecture
