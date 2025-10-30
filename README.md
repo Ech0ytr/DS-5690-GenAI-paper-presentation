@@ -285,17 +285,17 @@ Unlike ReLU (binary: on/off), GLU provides fine-grained control:
 | Gemma | Google | 2024 | ✅ GeGLU |
 | Claude | Anthropic | - | ✅ (variant) |
 
-### Why This Paper Matters
-1. **Simple Change, Big Impact**: Just changing FFN → 2-4% improvement
-2. **Thoroughly Validated**: Tested across 20+ different tasks
-3. **Theoretically Interesting**: Shows importance of multiplicative interactions
-4. **Practically Adopted**: Used in production by major LLMs
-5. **Influenced Future Research**: Inspired gated attention and other multiplicative designs
+### Influence on Transformer Design and Adoption
+
+This work has reshaped how researchers think about the internal architecture of Transformer models. By demonstrating that GLU variants—especially GEGLU and SwiGLU—can significantly improve pretraining perplexity and downstream performance, the paper shifted attention toward activation functions as a meaningful site of innovation. These findings have influenced the design of major language models such as GPT-3, PaLM, and LLaMA, which now incorporate GLU-based activations in their feed-forward blocks. The result is a broader recognition that small architectural changes can yield substantial gains in coherence, efficiency, and generalization, especially when compounded over long sequences.
+
+### Position Within the Broader AI Research Landscape
+
+The introduction of GLU variants builds on earlier ideas from gated mechanisms in LSTMs and convolutional networks, extending them into the Transformer’s feed-forward layers. It complements past work focused on scaling laws and attention mechanisms by showing that activation design also plays a critical role in model quality. In the present, GLU variants have become a standard component in high-performing LLMs, contributing to their fluency and robustness across tasks. Looking ahead, this work opens the door to further exploration of adaptive or learnable activations, and encourages deeper investigation into how subtle architectural choices affect interpretability, training dynamics, and cross-domain generalization.
 
 ---
 
 
-markdown
 ## Critical Analysis
 
 ### What Was Overlooked
