@@ -295,19 +295,40 @@ Unlike ReLU (binary: on/off), GLU provides fine-grained control:
 ---
 
 
+markdown
 ## Critical Analysis
 
-While the paper convincingly demonstrates that GLU variants improve Transformer performance during pretraining and fine-tuning, it does not deeply explore the **interpretability or internal dynamics** of why these activations work better.
+### What Was Overlooked
 
-Specifically:
-- The authors do **not analyze how GLU variants affect attention patterns**, gradient flow, or representation sparsity inside the Transformer.
-- This leaves a gap in understanding the **mechanistic reasons** behind the observed improvements.
+- **Interpretability and Mechanistic Insight**:  
+  The authors do not analyze *why* GLU variants outperform traditional activations. There is no investigation into how these activations affect:
+  - Attention distributions
+  - Gradient flow and saturation
+  - Representation sparsity or expressiveness
 
-Additionally:
-- The paper focuses on **standard benchmarks** (e.g., WMT, GLUE) but does **not test robustness** in low-resource or adversarial settings.
-- This limits insight into how well GLU variants generalize beyond curated datasets.
+  Without this, the paper lacks a mechanistic explanation for the observed performance gains.
 
-> These omissions present opportunities for future work to explore *why* GLU variants are effective and how they behave under more challenging or diverse conditions.
+- **Robustness and Generalization**:  
+  The experiments focus on standard benchmarks (e.g., GLUE, WMT), but do not test:
+  - Low-resource settings
+  - Adversarial inputs
+  - Cross-domain generalization
+
+  This limits confidence in how GLU variants perform under real-world variability.
+
+---
+
+### What Could Be Developed Further
+
+- **Activation Dynamics Analysis**:  
+  Future work could include probing studies or visualization techniques (e.g., attention heatmaps, activation histograms) to understand how GLU variants shape internal model behavior.
+
+- **Robustness Benchmarks**:  
+  Evaluating GLU-based models on tasks like adversarial QA, noisy translation, or zero-shot generalization would help assess their reliability.
+
+- **Efficiency Trade-offs**:  
+  The paper does not discuss computational cost or training stability. A deeper look into FLOPs, convergence speed, and memory usage would help practitioners decide when to adopt GLU variants.
+
 
 The Paper says
 > "We offer no explanation as to why these architectures seem to work; we attribute their success, as all else, to divine benevolence."
