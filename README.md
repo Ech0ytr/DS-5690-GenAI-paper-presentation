@@ -106,14 +106,7 @@ This foundational improvement in language modeling directly translates to better
   <img src="https://github.com/user-attachments/assets/140d75ae-c579-4d24-b81a-5bcd5ec65573" width="45%" alt="Right Image" />
 </p>
 
-
 ---
-
-modern LLMs like GPT-3, PaLM, and LLaMA have all adopted GLU variants.
-
----
-
-
 
 ### Key Insights from Visualizations
 
@@ -129,11 +122,8 @@ modern LLMs like GPT-3, PaLM, and LLaMA have all adopted GLU variants.
 
 ---
 
-## 🔧 How GLU Works: The Two-Path Architecture
 
 ## How GLU Works: The Two-Path Architecture
-
-### The Parallel Paths Explained
 
 **NOT splitting data** - same input goes through both paths:
 
