@@ -45,7 +45,7 @@ Input (x) → Linear (V) ──────────────┘
 ---
 
 <details>
-<summary><b>❓ Why is activation applied to W (gate) and not V (value)?</b></summary>
+<summary><b> First Primary Question: Why is activation applied to W (gate) and not V (value)?</b></summary>
 
 ### The Design Choice Explained
 
