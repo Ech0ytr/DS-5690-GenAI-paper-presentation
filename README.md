@@ -101,11 +101,33 @@ When generating 100 tokens, the probability of maintaining coherence:
 
 This foundational improvement in language modeling directly translates to better performance across all downstream tasks - which is why modern LLMs like GPT-3, PaLM, and LLaMA have all adopted GLU variants.
 
+<img width="1000" height="600" alt="image" src="https://github.com/user-attachments/assets/140d75ae-c579-4d24-b81a-5bcd5ec65573" />
+
+---
+
+modern LLMs like GPT-3, PaLM, and LLaMA have all adopted GLU variants.
+
 ---
 
 
 
+### Key Insights from Visualizations
+
+**Left Graph - Perplexity Comparison**:
+- GEGLU and SwiGLU achieve the lowest perplexity (1.633, 1.636)
+- Even simple variants (Bilinear, ReGLU) outperform standard activations
+- Clear performance grouping: GLU variants > Standard activations
+
+**Right Graph - Compound Effect**:
+- Small per-token improvements lead to exponential differences over sequences
+- At 100 tokens, GEGLU is 55× more likely to maintain coherence
+- The gap widens dramatically for longer generations (typical for real applications)
+
+---
+
 ## 🔧 How GLU Works: The Two-Path Architecture
+
+## How GLU Works: The Two-Path Architecture
 
 ### The Parallel Paths Explained
 
@@ -306,22 +328,6 @@ Total: 4,718,592 parameters
 
 ---
 
-## Metrics Explained
-
-### Classification Metrics
-- **Accuracy**: % of correct predictions
-- **F1 Score**: Harmonic mean of precision and recall (good for imbalanced data)
-- **MCC**: Matthews Correlation Coefficient (-1 to +1, handles imbalanced datasets)
-
-### Regression Metrics
-- **Pearson (PCC)**: Linear correlation between predicted and actual
-- **Spearman (SCC)**: Rank correlation (robust to outliers)
-
-### Exact Matching
-- **EM**: % where prediction exactly matches ground truth
-- **Strict but important**: "Paris, France" vs "Paris" = wrong
-
----
 
 ## Key Takeaways
 
@@ -409,18 +415,4 @@ output = model(x)  # [32, 100, 768]
 - Raffel et al. (2019) - **Exploring the Limits of Transfer Learning with T5**
 - Hendrycks & Gimpel (2016) - **Gaussian Error Linear Units (GELUs)**
 - Ramachandran et al. (2017) - **Searching for Activation Functions** (Swish)
-
----
-
-
-## Summary: Why You Should Care
-
-1. **Immediate Practical Value**: SwiGLU/GEGLU are used in production today
-2. **Simple to Implement**: Just replace your FFN layers
-3. **Consistent Gains**: Works across different model sizes and tasks
-4. **Theoretical Insights**: Shows importance of multiplicative interactions
-5. **Future Research**: Opens doors to exploring other gated architectures
-
----
-
 
