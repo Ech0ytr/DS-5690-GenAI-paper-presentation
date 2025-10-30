@@ -312,8 +312,6 @@ Additionally:
 The Paper says
 > "We offer no explanation as to why these architectures seem to work; we attribute their success, as all else, to divine benevolence."
 
-Despite this, the results speak for themselves!
-
 ---
 
 ## Future Directions
