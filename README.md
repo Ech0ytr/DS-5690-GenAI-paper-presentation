@@ -115,6 +115,50 @@ This architectural shift allows GLU variants to learn more selective and express
 
 ---
 
+## Algorithmic Comparison
+
+### **Algorithm 1: Standard Feed-Forward Network (Baseline)**
+```
+ALGORITHM: StandardFFN
+INPUT: x ∈ ℝ^(batch_size × seq_len × d_model)  // Input tensor from attention layer
+PARAMETERS: 
+    W₁ ∈ ℝ^(d_model × d_ff)  // First projection matrix (768 × 3072)
+    W₂ ∈ ℝ^(d_ff × d_model)  // Second projection matrix (3072 × 768)
+OUTPUT: y ∈ ℝ^(batch_size × seq_len × d_model)  // Output tensor
+
+PROCEDURE:
+1: h ← MatMul(x, W₁)           // Project to higher dimension: [B, L, 3072]
+2: h ← ReLU(h)                  // Apply activation: max(0, h)
+3: y ← MatMul(h, W₂)           // Project back: [B, L, 768]
+4: RETURN y
+
+COMPLEXITY: O(2 × batch_size × seq_len × d_model × d_ff)
+```
+
+### **Algorithm 2: GLU Feed-Forward Network (Proposed)**
+```
+ALGORITHM: GLU_FFN
+INPUT: x ∈ ℝ^(batch_size × seq_len × d_model)  // Input tensor from attention layer
+PARAMETERS:
+    W ∈ ℝ^(d_model × d_ff_glu)   // Gate projection matrix (768 × 2048)
+    V ∈ ℝ^(d_model × d_ff_glu)   // Value projection matrix (768 × 2048)
+    W₂ ∈ ℝ^(d_ff_glu × d_model)  // Output projection matrix (2048 × 768)
+    activation ∈ {sigmoid, swish, gelu, relu, identity}  // Activation function
+OUTPUT: y ∈ ℝ^(batch_size × seq_len × d_model)  // Output tensor
+
+PROCEDURE:
+1: gate ← MatMul(x, W)          // Compute gate path: [B, L, 2048]
+2: value ← MatMul(x, V)         // Compute value path: [B, L, 2048]
+3: gate ← activation(gate)      // Apply activation to gate only
+4: h ← gate ⊙ value            // Element-wise multiplication
+5: y ← MatMul(h, W₂)           // Project to output: [B, L, 768]
+6: RETURN y
+
+COMPLEXITY: O(3 × batch_size × seq_len × d_model × d_ff_glu)
+WHERE: d_ff_glu = (2/3) × d_ff to maintain parameter parity
+```
+
+
 ## Key Innovation: GLU Variants
 
 The paper tests multiple activation functions in the gating path:
