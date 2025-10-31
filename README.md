@@ -117,7 +117,7 @@ This architectural shift allows GLU variants to learn more selective and express
 
 ## Algorithmic Comparison
 
-### **Algorithm 1: Standard Feed-Forward Network (Baseline)**
+### Standard Feed-Forward Network
 ```
 ALGORITHM: StandardFFN
 INPUT: x ∈ ℝ^(batch_size × seq_len × d_model)  // Input tensor from attention layer
@@ -135,7 +135,7 @@ PROCEDURE:
 COMPLEXITY: O(2 × batch_size × seq_len × d_model × d_ff)
 ```
 
-### **Algorithm 2: GLU Feed-Forward Network (Proposed)**
+### GLU Feed-Forward Network 
 ```
 ALGORITHM: GLU_FFN
 INPUT: x ∈ ℝ^(batch_size × seq_len × d_model)  // Input tensor from attention layer
