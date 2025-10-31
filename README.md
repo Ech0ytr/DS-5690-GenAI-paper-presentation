@@ -69,47 +69,33 @@ By applying activation only to the gate, the GLU mechanism maintains a balance b
 
 ---
 
-## Second Question: How do the parameter dimensions and internal structure differ between the baseline linear FFN and the GLU-based FFN?
+## Second Question: How does GLU maintain the same parameter count as the baseline model?
 
 <details>
-  <summary>Show Answer</summary>
+    <summary>Show Answer</summary>
 
-### Architecture Comparison
+### The Parameter Parity Strategy
 
-**Standard FFN (Feed-Forward Network):**
-- Input: `[768]`
-- First Linear Layer: `W₁ [768×3072]`
-- Hidden Activation: `[3072]` → ReLU
-- Second Linear Layer: `W₂ [3072×768]`
-- Output: `[768]`
+The paper ensures fair comparison by carefully adjusting the hidden dimension to maintain exactly the same number of parameters between architectures.
 
-**GLU-based FFN:**
-- Input: `[768]`
-- Two Parallel Projections:
-  - Gate: `W [768×2048]`
-  - Value: `V [768×2048]`
-- Activation: GLU (element-wise multiplication after activation)
-- Combined Hidden: `[2048]`
-- Second Linear Layer: `W₂ [2048×768]`
-- Output: `[768]`
+#### The Mathematical Balance
 
-### Structural Differences
+Standard FFN uses 2 matrices with 3072 hidden dimensions, while GLU uses 3 matrices with reduced hidden dimensions. To keep parameters equal:
+```
+Standard FFN: 2 matrices × (768 × 3072) = 4,718,592 parameters
+GLU FFN:      3 matrices × (768 × ????)  = 4,718,592 parameters
 
-- **Projection Strategy**:  
-  The standard FFN uses a single wide projection to 3072 dimensions. GLU splits the input into two separate projections, each to 2048 dimensions, which are then combined via element-wise multiplication.
+Solving: 3 × (768 × ????) = 2 × (768 × 3072)
+         ???? = (2/3) × 3072 = 2048
+```
 
-- **Activation Mechanism**:  
-  In the standard FFN, ReLU is applied to the entire hidden layer. In GLU, activation is applied only to the gate path before combining with the value path, introducing a dynamic gating mechanism.
+#### Why This Matters
 
-- **Parameter Count**:  
-  GLU adds a second projection (V), increasing the number of parameters in the first layer. However, the hidden size is reduced from 3072 to 2048, which partially offsets the increase.
+Without parameter matching, we couldn't determine if improvements came from:
+- Better architecture 
+- Simply having more parameters 
 
-- **Dimensional Consistency**:  
-  Both architectures preserve the input and output dimensions of `[768]`, ensuring compatibility with the Transformer block. The internal structure is what differs.
-
-### Design Implication
-
-This architectural shift allows GLU variants to learn more selective and expressive representations. The gating mechanism enhances control over feature flow, contributing to lower perplexity and improved generalization in downstream tasks.
+By reducing the hidden dimension to exactly 2048, the paper ensures that GLU's superior performance is due to architectural innovation, not increased capacity. This makes GLU a true "drop-in replacement" - you get better performance without needing bigger hardware or increased memory.
 
 </details>
 
