@@ -458,52 +458,31 @@ The Paper says
 
 ---
 
-## Implementation Example
-
-### Simple PyTorch Implementation of SwiGLU
-
-```python
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class SwiGLU(nn.Module):
-    def __init__(self, dim, hidden_dim=None):
-        super().__init__()
-        if hidden_dim is None:
-            # Standard FFN uses 4x hidden dim
-            # We use 8/3x to maintain parameters with 3 matrices
-            hidden_dim = int(dim * 8 / 3)
-        
-        self.w = nn.Linear(dim, hidden_dim, bias=False)
-        self.v = nn.Linear(dim, hidden_dim, bias=False)
-        self.w2 = nn.Linear(hidden_dim, dim, bias=False)
-        
-    def forward(self, x):
-        # SwiGLU: (Swish(xW) ⊗ xV)W₂
-        gate = F.silu(self.w(x))  # silu = Swish activation
-        value = self.v(x)
-        gated = gate * value  # element-wise multiplication
-        output = self.w2(gated)
-        return output
-
-# Example usage
-model = SwiGLU(dim=768)
-x = torch.randn(32, 100, 768)  # [batch, sequence, features]
-output = model(x)  # [32, 100, 768]
-```
-
----
-
 ## References
 
 ### Main Paper
-- Shazeer, N. (2020). **GLU Variants Improve Transformer**. arXiv:2002.05202
+- Shazeer, N. (2020). **GLU Variants Improve Transformer**. arXiv preprint arXiv:2002.05202. Available at: https://arxiv.org/abs/2002.05202
 
 ### Related Work
-- Dauphin et al. (2016) - **Language Modeling with Gated Convolutional Networks** (Original GLU)
-- Vaswani et al. (2017) - **Attention Is All You Need** (Original Transformer)
-- Raffel et al. (2019) - **Exploring the Limits of Transfer Learning with T5**
-- Hendrycks & Gimpel (2016) - **Gaussian Error Linear Units (GELUs)**
-- Ramachandran et al. (2017) - **Searching for Activation Functions** (Swish)
+- Dauphin, Y. N., Fan, A., Auli, M., & Grangier, D. (2017). **Language Modeling with Gated Convolutional Networks**. In Proceedings of the 34th International Conference on Machine Learning (ICML 2017). Available at: https://arxiv.org/abs/1612.08083
+
+- Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). **Attention Is All You Need**. In Advances in Neural Information Processing Systems 30 (NeurIPS 2017). Available at: https://arxiv.org/abs/1706.03762
+
+- Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W., & Liu, P. J. (2020). **Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer**. Journal of Machine Learning Research, 21(140), 1-67. Available at: https://arxiv.org/abs/1910.10683
+
+- Hendrycks, D., & Gimpel, K. (2016). **Gaussian Error Linear Units (GELUs)**. arXiv preprint arXiv:1606.08415. Available at: https://arxiv.org/abs/1606.08415
+
+- Ramachandran, P., Zoph, B., & Le, Q. V. (2017). **Searching for Activation Functions**. arXiv preprint arXiv:1710.05941. Available at: https://arxiv.org/abs/1710.05941
+
+### Additional Context Papers 
+- Glorot, X., Bordes, A., & Bengio, Y. (2011). **Deep Sparse Rectifier Neural Networks**. In Proceedings of the 14th International Conference on Artificial Intelligence and Statistics (AISTATS 2011).
+
+- Shazeer, N., & Stern, M. (2018). **Adafactor: Adaptive Learning Rates with Sublinear Memory Cost**. In Proceedings of the 35th International Conference on Machine Learning (ICML 2018). Available at: https://arxiv.org/abs/1804.04235
+
+### Benchmarks Referenced
+- Wang, A., Singh, A., Michael, J., Hill, F., Levy, O., & Bowman, S. R. (2018). **GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding**. In Proceedings of the 2018 EMNLP Workshop BlackboxNLP. Available at: https://arxiv.org/abs/1804.07461
+
+- Wang, A., Pruksachatkun, Y., Nangia, N., Singh, A., Michael, J., Hill, F., Levy, O., & Bowman, S. R. (2019). **SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems**. In Advances in Neural Information Processing Systems 32 (NeurIPS 2019). Available at: https://arxiv.org/abs/1905.00537
+
+- Rajpurkar, P., Zhang, J., Lopyrev, K., & Liang, P. (2016). **SQuAD: 100,000+ Questions for Machine Comprehension of Text**. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing (EMNLP 2016). Available at: https://arxiv.org/abs/1606.05250
 
