@@ -69,6 +69,20 @@ By applying activation only to the gate, the GLU mechanism maintains a balance b
 
 ---
 
+### Experimental Configuration
+
+The paper builds upon the T5-Base architecture from Raffel et al. (2019):
+
+**Model Specifications:**
+- **Architecture**: Encoder-decoder Transformer with 12 layers each
+- **Model Dimension**: d_model = 768
+- **Attention Configuration**: 12 heads with dk = dv = 64
+- **FFN Hidden Size**: 
+  - Standard FFN: d_ff = 3072
+  - GLU variants: d_ff = ?
+ 
+---
+
 ## Second Question: How does GLU maintain the same parameter count as the baseline model?
 
 <details>
