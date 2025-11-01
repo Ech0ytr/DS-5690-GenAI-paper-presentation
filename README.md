@@ -235,19 +235,6 @@ This foundational improvement in language modeling directly translates to better
 
 Even without activation functions, element-wise multiplication is non-linear:
 
-```python
-# Example showing non-linearity
-x = [1, 2]
-gate = [3, -1]  
-value = [2, 4]
-output = [3×2, -1×4] = [6, -4]
-
-# If we double x:
-x_doubled = [2, 4]
-gate_doubled = [6, -2]
-value_doubled = [4, 8]
-output_doubled = [24, -16]  # 4x increase, not 2x! Non-linear!
-```
 
 **Why Non-linearity Matters**:
 - Enables learning complex patterns
