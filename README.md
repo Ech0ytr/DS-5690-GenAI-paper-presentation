@@ -1,4 +1,4 @@
-# GLU Variants Improve Transformer - Paper Presentation
+# GLU Variants Improve Transformer
 
 ## Paper Overview
 
