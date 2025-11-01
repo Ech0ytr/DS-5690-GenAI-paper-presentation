@@ -322,10 +322,6 @@ Unlike ReLU (binary: on/off), GLU provides fine-grained control:
 
 This work has reshaped how researchers think about the internal architecture of Transformer models. By demonstrating that GLU variants—especially GEGLU and SwiGLU—can significantly improve pretraining perplexity and downstream performance, the paper shifted attention toward activation functions as a meaningful site of innovation. These findings have influenced the design of major language models such as GPT-3, PaLM, and LLaMA, which now incorporate GLU-based activations in their feed-forward blocks. The result is a broader recognition that small architectural changes can yield substantial gains in coherence, efficiency, and generalization, especially when compounded over long sequences.
 
-### Position Within the Broader AI Research Landscape
-
-The introduction of GLU variants builds on earlier ideas from gated mechanisms in LSTMs and convolutional networks, extending them into the Transformer’s feed-forward layers. It complements past work focused on scaling laws and attention mechanisms by showing that activation design also plays a critical role in model quality. In the present, GLU variants have become a standard component in high-performing LLMs, contributing to their fluency and robustness across tasks. Looking ahead, this work opens the door to further exploration of adaptive or learnable activations, and encourages deeper investigation into how subtle architectural choices affect interpretability, training dynamics, and cross-domain generalization.
-
 ---
 
 
@@ -359,29 +355,8 @@ The introduction of GLU variants builds on earlier ideas from gated mechanisms i
 - **Robustness Benchmarks**:  
   Evaluating GLU-based models on tasks like adversarial QA, noisy translation, or zero-shot generalization would help assess their reliability.
 
-- **Efficiency Trade-offs**:  
-  The paper does not discuss computational cost or training stability. A deeper look into FLOPs, convergence speed, and memory usage would help practitioners decide when to adopt GLU variants.
-
-
-The Paper says
+The Paper said
 > "We offer no explanation as to why these architectures seem to work; we attribute their success, as all else, to divine benevolence."
-
----
-
-## Future Directions
-
-### Questions This Paper Raises
-1. Why do GEGLU/SwiGLU specifically work best?
-2. Could we stack multiple GLU layers?
-3. What about gating in attention mechanisms?
-4. Are there even better activation functions to discover?
-5. Can we apply this to vision transformers?
-
-### Subsequent Research Inspired
-- **Flash Attention**: Uses gating ideas for efficient attention
-- **Mixture of Experts**: Gates for routing between experts
-- **State Space Models**: Mamba uses selective gating
-- **Vision Transformers**: Adapted GLU for image processing
 
 ---
 
